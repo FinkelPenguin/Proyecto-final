@@ -1,0 +1,18 @@
+# Palmer Penguins: Práctica General
+
+### Pablo de Lucía Finkel
+
+Vamos a comenzar la práctica general instalando el paquete:
+
+```{r}
+install.packages("palmerpenguins")
+```
+
+Me dio un mensaje de warning, pero nada de errores y tenemos lo que queríamos. Ahora cargaremos la librería y los datos:
+
+```{r}
+library(palmerpenguins)
+data(package = "palmerpenguins")
+```
+
+Ya tenemos todos los datos necesarios para empezar a trabajar. ¡Antes haremos un commit!
