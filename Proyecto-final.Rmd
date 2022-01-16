@@ -11,8 +11,94 @@ install.packages("palmerpenguins")
 Me dio un mensaje de warning, pero nada de errores y tenemos lo que queríamos. Ahora cargaremos la librería y los datos:
 
 ```{r}
+library(plyr)
 library(palmerpenguins)
 data(package = "palmerpenguins")
 ```
 
 Ya tenemos todos los datos necesarios para empezar a trabajar. ¡Antes haremos un commit!
+
+Vamos a ver esos pingüinos:
+
+```{r}
+str(penguins)
+```
+
+## Apartado 1
+
+Primero determinaremos el número de pingüinos por especie utilizando una función que toma como argumentos la columna "Species" (x), que es un vector, y la especie en particular que buscamos (value).
+
+Dentro de la función establecemos un loop. Por cada posición \[penguin\], empezando por la primera (1) hasta la última (length(x)), revisará si el segundo argumento (value) se corresponde con la especie de interés en una determinada posición \[penguin\], y añadirá 1 a la cuenta de (value), que empieza en 0.
+
+Así, podemos llamar a la función contadora de especies (nspecies) para cada especie. Toma ya.
+
+```{r}
+nspecies <- function(x, value) {
+  count <- 0
+  for (penguin in 1:length(x)) {
+    if (x[penguin] == value) {
+      count <- count + 1
+    } 
+  }
+  count
+}
+nspecies(penguins$species, "Adelie")
+nspecies(penguins$species, "Gentoo")
+nspecies(penguins$species, "Chinstrap")
+```
+
+Hay 152 adelias, 124 gentoos y 68 barbijos. 344 en total.
+
+El siguiente paso será calcular la media, desviación estándar, los mínimos y los máximos de una serie de parámetros. El paso uno consiste en convertir en objetos las medidas de aleta, pico y masa corporal.
+
+```{r}
+longpico <- penguins$bill_length_mm
+profpico <- penguins$bill_depth_mm
+longaleta <- penguins$flipper_length_mm
+masacorp <- penguins$body_mass_g
+```
+
+Ahora bien, hay algunos valores n/a en estas columnas, así que al calcular las funciones, eliminaremos los valores n/a. Así obtenemos los resultados del apartado 1:
+
+```{r}
+mean(longpico, na.rm = TRUE)
+sd(longpico, na.rm = TRUE)
+max(longpico, na.rm = TRUE)
+min(longpico, na.rm = TRUE)
+
+mean(profpico, na.rm = TRUE)
+sd(profpico, na.rm = TRUE)
+max(profpico, na.rm = TRUE)
+min(profpico, na.rm = TRUE)
+
+mean(longaleta, na.rm = TRUE)
+sd(longaleta, na.rm = TRUE)
+max(longaleta, na.rm = TRUE)
+min(longaleta, na.rm = TRUE)
+
+mean(masacorp, na.rm = TRUE)
+sd(masacorp, na.rm = TRUE)
+max(masacorp, na.rm = TRUE)
+min(masacorp, na.rm = TRUE)
+
+```
+
+Sin embargo, estos resultados se pueden organizar mejor creando una lista en la que se calculen todas las funciones requeridas al mismo tiempo para cada vector del data frame (medidas de pico, aletas y masa corporal):
+
+```{r}
+longpico_all <- list(mean = "mean", sd = "sd", max = "max", min = "min")
+sapply(longpico_all, do.call, args = list(longpico, na.rm = TRUE))
+
+profpico_all <- list(mean = "mean", sd = "sd", max = "max", min = "min")
+sapply(profpico_all, do.call, args = list(profpico, na.rm = TRUE))
+
+longaleta_all <- list(mean = "mean", sd = "sd", max = "max", min = "min")
+sapply(longaleta_all, do.call, args = list(longaleta, na.rm = TRUE))
+
+masacorp_all <- list(mean = "mean", sd = "sd", max = "max", min = "min")
+sapply(masacorp_all, do.call, args = list(masacorp, na.rm = TRUE))
+```
+
+Con esto hecho, volvemos a hacer un buen commit.
+
+## Apartado 2
