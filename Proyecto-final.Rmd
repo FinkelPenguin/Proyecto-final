@@ -102,3 +102,41 @@ sapply(masacorp_all, do.call, args = list(masacorp, na.rm = TRUE))
 Con esto hecho, volvemos a hacer un buen commit.
 
 ## Apartado 2
+
+Para realizar gráficos comenzaremos el apartado dos instalando los paquetes que utilizamos el día 3 del curso, por si fueran necesarios, y revisamos que quedan bien instalados:
+
+```{r}
+install.packages(c("ggplot2", "readr", "ggThemeAssist", "patchwork", "titanic", "dplyr", "terra", "sf", "ggmap"))
+install.packages(c("promises","mime", "cachem"))
+
+c("ggplot2", "readr", "dplyr", "ggThemeAssist", "patchwork", "titanic", "easyclimate", "terra", "sf", "ggmap") %in% rownames(installed.packages())
+c("promises","mime", "cachem") %in% rownames(installed.packages())
+```
+
+Pasamos a la gráfica. Se pide un gráfico de barras que represente el número de individuos muestreados de cada especie en cada isla, representando las especies en diferentes colores.
+
+Vamos a tirar de las joyas de ggplot. El número de especies será el eje y, las islas el eje x, y las especies será el relleno de color, que tenemos que cambiar acorde a las instrucciones.
+
+Para afinarlo bien, cambiaremos el nombre del eje y, y añadiremos un título:
+
+```{r}
+library(ggplot2)
+library(dplyr)
+
+ggplot(penguins, aes(x = island, fill = species)) +
+  geom_bar(position = position_dodge2(preserve = "single")) +
+  scale_fill_manual(values = c("orange", "purple", "steelblue1")) +
+  ggtitle("Penguin species living on three islands") +
+  ylab("Number of penguins")
+  
+```
+
+Con este gráfico ya podemos responder a las dos preguntas de la práctica. Sabemos que la única especie que se ha muestreado en las tres islas es el pingüino de Adelia (mi especie favorita de las 18 que hay). En la isla Dream se han muestreado 56 Adelia y 68 barbijos, siendo un total de 124 pingüinos.
+
+Esto último lo sé porque he utilizado una función dentro del gráfico para mostrar los datos por columna, pero al no saber moverlo u organizarlo bien lo he quitado porque quedaba feo. Aún así, la línea de código que utilicé para verlo fue la siguiente:
+
+stat_count(geom = "text", size = 2.5, aes(label = ..count..))
+
+Terminamos con otro commit :)
+
+## Apartado 3
