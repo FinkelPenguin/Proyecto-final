@@ -30,7 +30,7 @@ Primero determinaremos el número de pingüinos por especie utilizando una funci
 
 Dentro de la función establecemos un loop. Por cada posición \[penguin\], empezando por la primera (1) hasta la última (length(x)), revisará si el segundo argumento (value) se corresponde con la especie de interés en una determinada posición \[penguin\], y añadirá 1 a la cuenta de (value), que empieza en 0.
 
-Así, podemos llamar a la función contadora de especies (nspecies) para cada especie. Toma ya.
+Así, podemos llamar a la función contadora de especies (nspecies) para cada especie. Toma ya. Conozco los loops porque los aprendí en Python.
 
 ```{r}
 nspecies <- function(x, value) {
@@ -140,3 +140,29 @@ stat_count(geom = "text", size = 2.5, aes(label = ..count..))
 Terminamos con otro commit :)
 
 ## Apartado 3
+
+En este apartado se nos pide un gráfico de cajas y bigotes donde se compare el tamaño de cada especie de pingüino según su sexo. También usaremos ggplot2.
+
+He visto por el internet pululando una función llamada complete.cases() que elimina todas las filas (o columnas) con datos "n/a". La he utilizado para eliminar una tercera columna en el boxplot que representa los casos n/a. Ha eliminado 11 filas y queda bien.
+
+```{r}
+penguins_complete <- penguins[complete.cases(penguins), ]
+
+ggplot(data = penguins_complete) +
+  geom_boxplot(aes(x = sex, y = body_mass_g), 
+               fill = c("orange", "orange", "purple", 
+                        "purple", "steelblue1", "steelblue1")) +
+  facet_wrap(facets = vars(species), ncol = 3) +
+  ggtitle("Penguin size by sex") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  ylab("Body mass (size)")
+  
+```
+
+Este gráfico nos indica que la especie de mayor tamaño son los pingüinos Gentoo, que en Sudamérica llaman los "Juanito". El Barbijo, sin embargo, es la especie cuyas hembras y machos tienen el tamaño más parecido.
+
+Con este gráfico acabamos la práctica general. Permitidme añadir que ha sido muy especial no solo porque ha sido mi primera experiencia en programación, también porque amo a los pingüinos, y algún día iré a verlos a la Antártida.
+
+Terminamos con el último commit ya y lo pasamos a HTML.
+
+-Pablo L. Finkel
