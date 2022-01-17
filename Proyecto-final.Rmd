@@ -155,8 +155,7 @@ ggplot(data = penguins_complete) +
   facet_wrap(facets = vars(species), ncol = 3) +
   ggtitle("Penguin size by sex") +
   theme(plot.title = element_text(hjust = 0.5)) +
-  ylab("Body mass (size)")
-  
+  ylab("Body mass (size in g)")
 ```
 
 Este gráfico nos indica que la especie de mayor tamaño son los pingüinos Gentoo, que en Sudamérica llaman los "Juanito". El Barbijo, sin embargo, es la especie cuyas hembras y machos tienen el tamaño más parecido.
