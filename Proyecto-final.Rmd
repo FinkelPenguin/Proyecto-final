@@ -2,13 +2,7 @@
 
 ### Pablo de Lucía Finkel
 
-Vamos a comenzar la práctica general instalando el paquete:
-
-```{r}
-install.packages("palmerpenguins")
-```
-
-Me dio un mensaje de warning, pero nada de errores y tenemos lo que queríamos. Ahora cargaremos la librería y los datos:
+Vamos a comenzar la práctica general.
 
 ```{r}
 library(plyr)
@@ -103,12 +97,9 @@ Con esto hecho, volvemos a hacer un buen commit.
 
 ## Apartado 2
 
-Para realizar gráficos comenzaremos el apartado dos instalando los paquetes que utilizamos el día 3 del curso, por si fueran necesarios, y revisamos que quedan bien instalados:
+Para realizar gráficos comenzaremos el apartado dos instalando los paquetes que utilizamos el día 3 del curso, por si fueran necesarios, y revisamos que quedan bien instalados.
 
 ```{r}
-install.packages(c("ggplot2", "readr", "ggThemeAssist", "patchwork", "titanic", "dplyr", "terra", "sf", "ggmap"))
-install.packages(c("promises","mime", "cachem"))
-
 c("ggplot2", "readr", "dplyr", "ggThemeAssist", "patchwork", "titanic", "easyclimate", "terra", "sf", "ggmap") %in% rownames(installed.packages())
 c("promises","mime", "cachem") %in% rownames(installed.packages())
 ```
